@@ -1,0 +1,38 @@
+body{
+  margin: 2%;
+  background-color: #8fcfa1;
+}
+.introduction{
+  margin: 2%;
+  text-align: center;
+  font-size: 2vw;
+}
+#game_title{
+  font-size: 3vw;
+}
+div#images_dragging_and_container_to_drag_inside{
+  width:80%;
+}
+div#container_mixed_images{
+  margin-left: 5%;
+  width: 90%;
+
+  height: 100%;
+  border: 2px solid blue;
+}
+
+
+
+
+div#col_1{
+  width:195px;
+  height:148px;
+  border: 1px solid blue;
+
+}
+p.piece_number{
+  text-align: center;
+  margin: 25%;
+  color: blue;
+  font-size: 2.5vw;
+}

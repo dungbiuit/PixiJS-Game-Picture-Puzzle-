@@ -1,0 +1,84 @@
+{"frames": {
+
+"1.png":
+{
+	"frame": {"x":0,"y":0,"w":1000,"h":667},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1000,"h":667},
+	"sourceSize": {"w":1000,"h":667}
+},
+"2.png":
+{
+	"frame": {"x":1000,"y":0,"w":1000,"h":667},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1000,"h":667},
+	"sourceSize": {"w":1000,"h":667}
+},
+"3.png":
+{
+	"frame": {"x":2000,"y":0,"w":1000,"h":667},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1000,"h":667},
+	"sourceSize": {"w":1000,"h":667}
+},
+"4.png":
+{
+	"frame": {"x":0,"y":667,"w":1000,"h":667},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1000,"h":667},
+	"sourceSize": {"w":1000,"h":667}
+},
+"5.png":
+{
+	"frame": {"x":1000,"y":667,"w":1000,"h":667},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1000,"h":667},
+	"sourceSize": {"w":1000,"h":667}
+},
+"6.png":
+{
+	"frame": {"x":2000,"y":667,"w":1000,"h":667},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1000,"h":667},
+	"sourceSize": {"w":1000,"h":667}
+},
+"7.png":
+{
+	"frame": {"x":0,"y":1334,"w":1000,"h":667},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1000,"h":667},
+	"sourceSize": {"w":1000,"h":667}
+},
+"8.png":
+{
+	"frame": {"x":1000,"y":1334,"w":1000,"h":667},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1000,"h":667},
+	"sourceSize": {"w":1000,"h":667}
+},
+"9.png":
+{
+	"frame": {"x":2000,"y":1334,"w":1000,"h":667},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1000,"h":667},
+	"sourceSize": {"w":1000,"h":667}
+}},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "file_json.png",
+	"format": "RGBA8888",
+	"size": {"w":3000,"h":2001},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:ae9502e0a6be49fae32d31063c5d3bab:1f7497d9e4ba16a8fa3587fe197bac5d:539ed8a7d401833a420799b87cfdb9ec$"
+}
+}

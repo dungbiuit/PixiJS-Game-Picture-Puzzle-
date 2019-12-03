@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" style="height:100%">
+	<head>
+		<meta charset="utf-8">
+			<link rel="stylesheet" type="text/css" href="style.css">
+				<title>Game</title>
+				<script src="pixi.min.js"></script>
+			</head>
+			<body style="height:60%;">
+				<div class="introduction">
+					<h2 id="game_title">GAME XẾP HÌNH</h2>
+					<p>Họ tên sinh viên: Nguyễn Trí Dũng</p>
+					<p>MSSV:N16DCPT005</p>
+				</div>
+				<div id="container_mixed_images" style="position:relative;z-index:2;" >
+					<!-- row_1 -->
+					<div id="row_1" style="left: 55%;z-index:-1;width:45%;height:148px ;border: 2px solid blue;position:absolute;">
+						<div id="col_1" style="left:0px;width:198px;height:148px;z-index:-1;border-right:2px solid blue;position:absolute">
+							<p class="piece_number">1</p>
+						</div>
+						<div id="col_2" style="left:195px;width:198px;height:148px;z-index:-1;border-right:2px solid blue;position:absolute;
+                        clear:both">
+							<p class="piece_number">2</p>
+						</div>
+						<!-- col_3 -->
+						<div id="col_3" style="right:0px;width:195px;height:148px;z-index:-1;position:absolute;
+                      clear:both">
+							<p class="piece_number">3</p>
+						</div>
+					</div>
+					<!-- row_2 -->
+					<div id="row_2" style="top:148px;left: 55%;z-index:-2;width:45%;height:148px ;border: 2px solid blue;position:absolute;clear:both">
+						<div id="col_1" style="left:0px;width:198px;height:148px;z-index:-1;border-right:2px solid blue;position:absolute">
+							<p class="piece_number">4</p>
+						</div>
+						<div id="col_2" style="left:195px;width:198px;height:148px;z-index:-1;border-right:2px solid blue;position:absolute;
+                         clear:both">
+							<p class="piece_number">5</p>
+						</div>
+						<!-- col_3 -->
+						<div id="col_3" style="right:0px;width:195px;height:148px;z-index:-1;position:absolute;
+                       clear:both">
+							<p class="piece_number">6</p>
+						</div>
+					</div>
+					<!-- row_3 -->
+					<div id="row_3" style="bottom:0px;left: 55%;z-index:-3;width:45%;height:148px ;border: 2px solid blue;clear:both;position:absolute">
+						<div id="col_1" style="left:0px;width:198px;height:148px;z-index:-1;border-right:2px solid blue;position:absolute">
+							<p class="piece_number">7</p>
+						</div>
+						<div id="col_2" style="left:195px;width:198px;height:148px;z-index:-1;border-right:2px solid blue;position:absolute;
+                         clear:both">
+							<p class="piece_number">8</p>
+						</div>
+						<!-- col_3 -->
+						<div id="col_3" style="right:0px;width:195px;height:148px;z-index:-1;position:absolute;
+                       clear:both">
+							<p class="piece_number">9</p>
+						</div>
+					</div>
+					<!-- Script for images to drag in container -->
+					<!-- Script for container -->
+					<script type="text/javascript">
+   var parent_mixed_images= document.getElementById("container_mixed_images");
+          //Create an App --!>
+    let app = new PIXI.Application({width: parent_mixed_images.offsetWidth, height:  parent_mixed_images.offsetHeight, transparent: true});
+            //Link this app to appear on screen --!>
+      const displayDiv = document.querySelector('#container_mixed_images')
+      displayDiv.appendChild(app.view);
+      //Position of each container
+  let array_x_position_of_each_container=[733,931,1129,1506];
+  let array_y_position_of_each_container=[0,151,299,447];
+                        //Pixi needs a Loader for every program --!>
+  let loader=PIXI.Loader.shared;
+  loader
+  .add("source_image/file_json.json")
+  .load(setup);
+																										//Sound Effect
+
+
+  //get Directory of all img
+  let array_img_directory= ["1.png","2.png","3.png","4.png","5.png","6.png","7.png","8.png","9.png"];
+
+
+                                                            //Extend prototype
+    function ImagePiece(imageURL)
+      {
+        PIXI.Sprite.from(imageURL);
+      }
+
+      ImagePiece.prototype = Object.create(PIXI.Sprite.prototype);
+      ImagePiece.prototype.constructor = ImagePiece;
+      ImagePiece.prototype.piece_index;
+      ImagePiece.prototype.min_x;
+      ImagePiece.prototype.min_y;
+      ImagePiece.prototype.max_x;
+      ImagePiece.prototype.max_y;
+			ImagePiece.prototype.beginning_x;
+			ImagePiece.prototype.beginning_y;
+
+          // This array will contains  all images
+  let array_images=new Array();
+
+                    // Pixi will regconizes each image as a sprite --!>
+function setup() {
+
+    for (var i = 0; i < array_img_directory.length; i++) {
+        //Load this object to "array_image"- which will contains all of pieces --!>
+      array_images.push( new PIXI.Sprite.from(array_img_directory[i]));
+
+    }
+    for (var i = 0; i < array_images.length; i++) {
+        //Load this object to "array_image"- which will contains all of pieces --!>
+        array_images[i].piece_index=i+1;
+
+    }
+
+                                            //Use an array to contains all of pieces before shuffle
+
+
+                                                      // Function random pieces
+          shuffle(array_images);
+																											//Piece Width Height
+        const piece_width=195;
+        const piece_height=148;
+          var temp=0;
+          var count_image_each_row=0;
+    for (var i = 0; i < array_images.length; i++) {
+    //Load this object to "stage"- where object will be visible --!>
+    array_images[i].width=piece_width;
+    array_images[i].height=piece_height;
+
+        if(i==0){
+					array_images[i].beginning_x=0;
+					array_images[i].beginning_y=0;
+          app.stage.addChild(array_images[i]);
+        }else{
+                                          //3 pics first row
+      temp++;
+      if(i==0 || i==1 || i==2){
+      array_images[i].x=(array_images[i].width *i)+(3*temp);
+			array_images[i].beginning_x=array_images[i].x;
+			array_images[i].beginning_y=0;
+        if(i==2){
+          temp=0;
+        }
+      }
+    if(i==3 || i==4 || i==5){
+        temp++;
+          if(i==3){
+					array_images[i].beginning_x=0;
+        array_images[i].y=array_images[0].y+piece_height+3;
+					array_images[i].beginning_y=array_images[i].y;
+        console.log("I am special!!");
+      }else{
+        count_image_each_row++;
+        array_images[i].x=(piece_width* count_image_each_row)+(3*count_image_each_row);
+        array_images[i].y=array_images[i-1].y;
+				array_images[i].beginning_x=array_images[i].x;
+				array_images[i].beginning_y=array_images[i].y;
+      }
+        if(i==5){
+          temp=0;
+          count_image_each_row=0;
+        }
+    }
+
+    if(i==6 || i==7 || i==8){
+
+          if(i==6){
+						array_images[i].beginning_x=0;
+        array_images[i].y=array_images[3].y+piece_height+(3*temp);
+				array_images[i].beginning_y=array_images[i].y;
+        console.log("I am special!!");
+      }else{
+        count_image_each_row++;
+        array_images[i].x=array_images[i-1].x +piece_width + 3;
+        array_images[i].y=array_images[i-1].y;
+				array_images[i].beginning_x=array_images[i].x;
+				array_images[i].beginning_y=array_images[i].y;
+      }
+    }
+                                                          //Print on screen
+        app.stage.addChild(array_images[i]);
+
+    }
+                                                          //Assign max min X Y
+  AssignMinMaxX_And_Y_Coordinates(array_images[i],array_images[i].piece_index);
+
+
+                                                        //Mouse interactive
+    array_images[i].interactive=true;
+    array_images[i].buttonMode=true;
+    array_images[i].on('mousedown',onDragStart)
+									.on('touchstart',onDragStart)
+                  .on('mouseup',onDragEnd)
+									.on('touchend',onDragEnd)
+                  .on('mousemove',onDragMove)
+									.on('touchmove',onDragMove);
+
+  }
+
+}
+                                                                //shuffle
+    function shuffle(a) {
+      var j, x, i;
+        for (i = a.length - 1; i > 0; i--) {
+          j = Math.floor(Math.random() * (i + 1));
+            x = a[i];
+            a[i] = a[j];
+            a[j] = x;
+        }
+            return a;
+    }
+
+																				// Count faults and piece_win;
+			var faults=0;
+			var correct_pieces=0;
+																				//Sound Effect;
+			var sound_effect= new Audio('sound_effect.mp3');
+			var sound_effect_2= new Audio('sound_effect_2.mp3');
+
+  function onDragStart(event){
+    this.data=event.data;
+    this.dragging=true;
+
+  }
+  function onDragEnd(){
+    this.dragging=false;
+
+		if((this.x>=this.min_x && this.x <=this.max_x)  && (this.y>=this.min_y && this.y <= this.max_y)){
+			this.x=this.min_x;
+			this.y=this.min_y;
+			this.interactive=false;
+			correct_pieces+=1;
+			sound_effect.play();
+		}else{
+			this.x=this.beginning_x;
+			this.y=this.beginning_y;
+			faults+=1;
+			sound_effect_2.play();
+		}
+    this.data=null;
+		WinOrLose(correct_pieces,faults);
+  }
+  function onDragMove(){
+
+      if(this.dragging){
+
+        var newPosition= this.data.getLocalPosition(this.parent);
+            this.x=newPosition.x;
+            this.y=newPosition.y;
+
+      }
+  }
+																															//Win or Lose function
+		function WinOrLose(a,b){
+			if(a==9){
+				if(!alert('Chúc mừng bạn giỏi lắm !!!')){window.location.reload();}
+			}
+			if(b==5){
+					if(!alert('Rất tiếc,bạn thua rồi!!!')){window.location.reload();}
+			}
+		}
+  function AssignMinMaxX_And_Y_Coordinates(a,piece_index){
+    switch (piece_index) {
+      case 1:{
+          a.min_x=array_x_position_of_each_container[0];
+          a.min_y=array_y_position_of_each_container[0];
+          a.max_x=array_x_position_of_each_container[1];
+          a.max_y=array_y_position_of_each_container[1];
+        break;
+      }
+      case 2:{
+          a.min_x=array_x_position_of_each_container[1];
+          a.min_y=array_y_position_of_each_container[0];
+          a.max_x=array_x_position_of_each_container[2];
+          a.max_y=array_y_position_of_each_container[1];
+        break;
+      }
+      case 3:{
+          a.min_x=array_x_position_of_each_container[2];
+          a.min_y=array_y_position_of_each_container[0];
+          a.max_x=array_x_position_of_each_container[3];
+          a.max_y=array_y_position_of_each_container[1];
+        break;
+      }
+      case 4:{
+          a.min_x=array_x_position_of_each_container[0];
+          a.min_y=array_y_position_of_each_container[1];
+          a.max_x=array_x_position_of_each_container[1];
+          a.max_y=array_y_position_of_each_container[2];
+        break;
+      }
+      case 5:{
+          a.min_x=array_x_position_of_each_container[1];
+          a.min_y=array_y_position_of_each_container[1];
+          a.max_x=array_x_position_of_each_container[2];
+          a.max_y=array_y_position_of_each_container[2];
+        break;
+      }
+      case 6:{
+          a.min_x=array_x_position_of_each_container[2];
+          a.min_y=array_y_position_of_each_container[1];
+          a.max_x=array_x_position_of_each_container[3];
+          a.max_y=array_y_position_of_each_container[2];
+        break;
+      }
+      case 7:{
+          a.min_x=array_x_position_of_each_container[0];
+          a.min_y=array_y_position_of_each_container[2];
+          a.max_x=array_x_position_of_each_container[1];
+          a.max_y=array_y_position_of_each_container[3];
+        break;
+      }
+      case 8:{
+          a.min_x=array_x_position_of_each_container[1];
+          a.min_y=array_y_position_of_each_container[2];
+          a.max_x=array_x_position_of_each_container[2];
+          a.max_y=array_y_position_of_each_container[3];
+        break;
+      }
+      default:{
+        a.min_x=array_x_position_of_each_container[2];
+        a.min_y=array_y_position_of_each_container[2];
+        a.max_x=array_x_position_of_each_container[3];
+        a.max_y=array_y_position_of_each_container[3];
+      }
+
+    }
+  }
+
+					</script>
+				</body>
+			</html>
